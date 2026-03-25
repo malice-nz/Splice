@@ -1,6 +1,6 @@
 # Splice
 
-A Luau compiler and virtual machine, written entirely in Luau. Splice takes Luau source code, compiles it down to bytecode, and runs it in its own VM with a configurable sandboxed environment.
+A Luau compiler and virtual machine, written entirely in Luau.
 
 ## Features
 
