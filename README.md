@@ -2,14 +2,6 @@
 
 A Luau compiler and virtual machine, written entirely in Luau.
 
-## Features
-
-- Full Luau lexer, parser, and compiler pipeline
-- Bytecode serialisation and deserialisation (version 6)
-- Stack-based virtual machine supporting all 83 Luau opcodes
-- Sandboxed execution with whitelist/blacklist controls, service blocking, and custom global injection
-- Upvalue handling, closures, varargs, and coroutine-compatible calling convention
-
 ## Usage
 
 ```luau
