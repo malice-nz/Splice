@@ -13,7 +13,7 @@ A Luau compiler and virtual machine, written entirely in Luau.
 ## Usage
 
 ```luau
-local Splice = require(path.to.Splice)
+local Splice = require(script.Splice)
 ```
 
 ### Compile and run
