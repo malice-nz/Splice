@@ -244,6 +244,8 @@ local CompareOps = {
 	[">="] = LOP.LOP_JUMPIFLE,
 }
 
+local CompileCall: (FS: any, Node: any, Target: number, NumResults: number) -> ()
+
 local function CompileCallArgs(FS: any, Node: any, ArgBase: number, NArgs: number, L: number): boolean
 	for I = 1, NArgs do
 		local Arg = Node.Args[I]
@@ -261,17 +263,14 @@ local function CompileCallArgs(FS: any, Node: any, ArgBase: number, NArgs: numbe
 	return false
 end
 
-local function CompileCall(FS: any, Node: any, Target: number, NumResults: number)
+CompileCall = function(FS: any, Node: any, Target: number, NumResults: number)
 	local L = Node.Line or 0
 
 	if Node.Kind == "MethodCallExpr" then
-		EmitABC(FS, LOP.LOP_NAMECALL, Target, 0, 0, L)
-		local NamecallPC = #FS.Code
-		local NameK = AddConstant(FS, Node.Method)
-		EmitAux(FS, NameK, L)
-
 		local ObjTemp = CompileExprToAnyReg(FS, Node.Object)
-		FS.Code[NamecallPC] = EncodeABC(LOP.LOP_NAMECALL, Target, ObjTemp, 0, L)
+		local NameK = AddConstant(FS, Node.Method)
+		EmitABC(FS, LOP.LOP_NAMECALL, Target, ObjTemp, 0, L)
+		EmitAux(FS, NameK, L)
 
 		local ArgBase = Target + 2
 		local NArgs = #Node.Args
